@@ -42,6 +42,12 @@ let queryType = new graphql.GraphQLObjectType({
         return true
       },
     },
+    list: {
+      type: new graphql.GraphQLList(userType),
+      resolve: () => {
+        return [{ id: 1, name: 'ha' }]
+      },
+    },
   },
 })
 
@@ -56,7 +62,7 @@ let mutation = new graphql.GraphQLObjectType({
         },
       },
       resolve: (_, { id }) => {
-        return 1
+        return id
       },
     },
   },
