@@ -29,15 +29,18 @@ let queryType = new graphql.GraphQLObjectType({
     user: {
       type: userType,
       args: {
-        id: { type: graphql.GraphQLString },
+        id: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLString),
+          defaultValue: 'a',
+        },
       },
+      description: '这是一个参数集合',
       resolve: (_, { id }) => {
         return fakeDataBase[id] || null
       },
     },
     gov: {
       type: graphql.GraphQLBoolean,
-      deprecationReason: '这个是一个测试的',
       resolve: () => {
         return true
       },
